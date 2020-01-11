@@ -1,7 +1,7 @@
 {
   "name": "react-native-zebra-barcode",
   "version": "0.1.0",
-  "description": "",
+  "description": "MIT",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
@@ -21,7 +21,7 @@
     "typescript": "^3.5.1",
     "@types/react-native": "^0.60.30"
   },
-  "dependencies": {
+  "PeerDependencies": {
     "react-native": "^0.61.5"
   }
 }
