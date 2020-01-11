@@ -21,7 +21,7 @@
     "typescript": "^3.5.1",
     "@types/react-native": "^0.60.30"
   },
-  "PeerDependencies": {
+  "peerDependencies": {
     "react-native": "^0.61.5"
   }
 }
