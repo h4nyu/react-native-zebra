@@ -1,0 +1,12 @@
+version: '3.4'
+
+services:
+  app: 
+    build:
+      context: .
+      args:
+        - http_proxy
+        - https_proxy
+    command: npm start
+    volumes:
+      - .:/srv
