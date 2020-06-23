@@ -14,6 +14,7 @@ import com.facebook.react.modules.core.DeviceEventManagerModule;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 import java.util.HashMap;
 import java.util.Optional;
 import android.util.Log;
@@ -97,8 +98,8 @@ public class RNZebraBarcodeModule extends ReactContextBaseJavaModule implements 
       @Override
       public void run() {
         try {
-          devices = new ArrayList<DCSScannerInfo>();
           sdkHandler.dcssdkGetAvailableScannersList(devices);
+          devices =  devices.stream().distinct().collect(Collectors.toList());
           final WritableArray payload = new WritableNativeArray();
           for (DCSScannerInfo device : devices) {
             payload.pushMap(toScannerDeviceMap(device));
