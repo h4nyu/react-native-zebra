@@ -1339,7 +1339,7 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
   _reactNative.AppRegistry.registerComponent(_app.name, function () {
     return _App.default;
   });
-},0,[1,2,475,476],"example/index.js");
+},0,[1,2,475,478],"example/index.js");
 __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, exports, _dependencyMap) {
   function _interopRequireDefault(obj) {
     return obj && obj.__esModule ? obj : {
@@ -104243,28 +104243,55 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
 __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, exports, _dependencyMap) {
   var _interopRequireDefault = _$$_REQUIRE(_dependencyMap[0], "@babel/runtime/helpers/interopRequireDefault");
 
+  var _interopRequireWildcard = _$$_REQUIRE(_dependencyMap[1], "@babel/runtime/helpers/interopRequireWildcard");
+
   Object.defineProperty(exports, "__esModule", {
     value: true
   });
   exports.default = void 0;
 
-  var _classCallCheck2 = _interopRequireDefault(_$$_REQUIRE(_dependencyMap[1], "@babel/runtime/helpers/classCallCheck"));
+  var _regenerator = _interopRequireDefault(_$$_REQUIRE(_dependencyMap[2], "@babel/runtime/regenerator"));
 
-  var _inherits2 = _interopRequireDefault(_$$_REQUIRE(_dependencyMap[2], "@babel/runtime/helpers/inherits"));
+  var _defineProperty2 = _interopRequireDefault(_$$_REQUIRE(_dependencyMap[3], "@babel/runtime/helpers/defineProperty"));
 
-  var _possibleConstructorReturn2 = _interopRequireDefault(_$$_REQUIRE(_dependencyMap[3], "@babel/runtime/helpers/possibleConstructorReturn"));
+  var _classCallCheck2 = _interopRequireDefault(_$$_REQUIRE(_dependencyMap[4], "@babel/runtime/helpers/classCallCheck"));
 
-  var _getPrototypeOf2 = _interopRequireDefault(_$$_REQUIRE(_dependencyMap[4], "@babel/runtime/helpers/getPrototypeOf"));
+  var _inherits2 = _interopRequireDefault(_$$_REQUIRE(_dependencyMap[5], "@babel/runtime/helpers/inherits"));
 
-  var _react = _interopRequireDefault(_$$_REQUIRE(_dependencyMap[5], "react"));
+  var _possibleConstructorReturn2 = _interopRequireDefault(_$$_REQUIRE(_dependencyMap[6], "@babel/runtime/helpers/possibleConstructorReturn"));
 
-  var _reactNative = _$$_REQUIRE(_dependencyMap[6], "react-native");
+  var _getPrototypeOf2 = _interopRequireDefault(_$$_REQUIRE(_dependencyMap[7], "@babel/runtime/helpers/getPrototypeOf"));
+
+  var _react = _interopRequireDefault(_$$_REQUIRE(_dependencyMap[8], "react"));
+
+  var _reactNative = _$$_REQUIRE(_dependencyMap[9], "react-native");
+
+  var Zebra = _interopRequireWildcard(_$$_REQUIRE(_dependencyMap[10], "../src"));
 
   var _jsxFileName = "/srv/example/App.tsx";
+
+  function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+  function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { (0, _defineProperty2.default)(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
   function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = (0, _getPrototypeOf2.default)(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = (0, _getPrototypeOf2.default)(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return (0, _possibleConstructorReturn2.default)(this, result); }; }
 
   function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+  var HLine = function HLine() {
+    return _react.default.createElement(_reactNative.View, {
+      style: {
+        borderBottomColor: 'black',
+        borderBottomWidth: 1,
+        margin: 5
+      },
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 5,
+        columnNumber: 21
+      }
+    });
+  };
 
   var App = function (_React$Component) {
     (0, _inherits2.default)(App, _React$Component);
@@ -104281,21 +104308,285 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
       }
 
       _this = _super.call.apply(_super, [this].concat(args));
+      _this.state = {
+        devices: [],
+        deviceName: null,
+        barcode: null
+      };
+
+      _this.getAvailableDevices = function _callee() {
+        var devices;
+        return _regenerator.default.async(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return _regenerator.default.awrap(Zebra.getAvailableDevices());
+
+              case 2:
+                devices = _context.sent;
+
+                _this.setState(_objectSpread(_objectSpread({}, _this.state), {}, {
+                  devices: devices
+                }));
+
+              case 4:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, null, null, null, Promise);
+      };
+
+      _this.connect = function _callee2() {
+        var _this$state, devices, deviceName, _deviceName;
+
+        return _regenerator.default.async(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _this$state = _this.state, devices = _this$state.devices, deviceName = _this$state.deviceName;
+
+                if (!(devices.length > 0)) {
+                  _context2.next = 6;
+                  break;
+                }
+
+                _context2.next = 4;
+                return _regenerator.default.awrap(Zebra.connect(devices[0].name));
+
+              case 4:
+                _deviceName = _context2.sent;
+
+                _this.setState(_objectSpread(_objectSpread({}, _this.state), {}, {
+                  deviceName: _deviceName
+                }));
+
+              case 6:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, null, null, null, Promise);
+      };
+
+      _this.disconnect = function _callee3() {
+        var deviceName;
+        return _regenerator.default.async(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                deviceName = _this.state.deviceName;
+
+                if (!(deviceName !== null)) {
+                  _context3.next = 5;
+                  break;
+                }
+
+                _context3.next = 4;
+                return _regenerator.default.awrap(Zebra.disconnect(deviceName));
+
+              case 4:
+                _this.setState(_objectSpread(_objectSpread({}, _this.state), {}, {
+                  deviceName: null
+                }));
+
+              case 5:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, null, null, null, Promise);
+      };
+
+      _this.aimOn = function _callee4() {
+        return _regenerator.default.async(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                _context4.next = 2;
+                return _regenerator.default.awrap(Zebra.aimOn());
+
+              case 2:
+              case "end":
+                return _context4.stop();
+            }
+          }
+        }, null, null, null, Promise);
+      };
+
+      _this.aimOff = function _callee5() {
+        return _regenerator.default.async(function _callee5$(_context5) {
+          while (1) {
+            switch (_context5.prev = _context5.next) {
+              case 0:
+                _context5.next = 2;
+                return _regenerator.default.awrap(Zebra.aimOff());
+
+              case 2:
+              case "end":
+                return _context5.stop();
+            }
+          }
+        }, null, null, null, Promise);
+      };
+
+      _this.handleBarcodeRead = function (barcode) {
+        _this.setState(_objectSpread(_objectSpread({}, _this.state), {}, {
+          barcode: barcode
+        }));
+      };
+
+      _this.resetBarcode = function () {
+        _this.setState(_objectSpread(_objectSpread({}, _this.state), {}, {
+          barcode: null
+        }));
+      };
 
       _this.render = function () {
+        var _this$state2 = _this.state,
+            devices = _this$state2.devices,
+            deviceName = _this$state2.deviceName,
+            barcode = _this$state2.barcode;
         return _react.default.createElement(_reactNative.View, {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 12,
-            columnNumber: 7
+            lineNumber: 81,
+            columnNumber: 8
           }
-        }, _react.default.createElement(_reactNative.Text, {
+        }, _react.default.createElement(_reactNative.Button, {
+          title: "getAvailableDevices",
+          onPress: _this.getAvailableDevices,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 13,
-            columnNumber: 9
+            lineNumber: 82,
+            columnNumber: 10
           }
-        }, " aaa "));
+        }), devices.map(function (x) {
+          return _react.default.createElement(_reactNative.View, {
+            key: x.name,
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 85,
+              columnNumber: 14
+            }
+          }, _react.default.createElement(_reactNative.Text, {
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 86,
+              columnNumber: 16
+            }
+          }, "name: ", x.name), _react.default.createElement(_reactNative.Text, {
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 87,
+              columnNumber: 16
+            }
+          }, "address: ", x.address));
+        }), _react.default.createElement(HLine, {
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 91,
+            columnNumber: 10
+          }
+        }), _react.default.createElement(_reactNative.Button, {
+          title: "connect",
+          onPress: _this.connect,
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 93,
+            columnNumber: 10
+          }
+        }), _react.default.createElement(_reactNative.Text, {
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 94,
+            columnNumber: 10
+          }
+        }, "connectedDeviceName: ", deviceName), _react.default.createElement(HLine, {
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 95,
+            columnNumber: 10
+          }
+        }), _react.default.createElement(_reactNative.Button, {
+          title: "disconnect",
+          onPress: _this.disconnect,
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 97,
+            columnNumber: 10
+          }
+        }), _react.default.createElement(HLine, {
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 98,
+            columnNumber: 10
+          }
+        }), _react.default.createElement(_reactNative.Button, {
+          title: "aimOn",
+          onPress: _this.aimOn,
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 100,
+            columnNumber: 10
+          }
+        }), _react.default.createElement(HLine, {
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 101,
+            columnNumber: 10
+          }
+        }), _react.default.createElement(_reactNative.Button, {
+          title: "aimOff",
+          onPress: _this.aimOff,
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 102,
+            columnNumber: 10
+          }
+        }), _react.default.createElement(HLine, {
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 103,
+            columnNumber: 10
+          }
+        }), _react.default.createElement(_reactNative.Button, {
+          title: "reset barcode",
+          onPress: _this.resetBarcode,
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 105,
+            columnNumber: 10
+          }
+        }), _react.default.createElement(_reactNative.Text, {
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 106,
+            columnNumber: 10
+          }
+        }, " barcode: "), barcode ? _react.default.createElement(_react.default.Fragment, null, _react.default.createElement(_reactNative.Text, {
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 109,
+            columnNumber: 14
+          }
+        }, " type: ", barcode.type), _react.default.createElement(_reactNative.Text, {
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 110,
+            columnNumber: 14
+          }
+        }, " data: ", barcode.data)) : null, _react.default.createElement(Zebra.Receiver, {
+          onBarcodeRead: _this.handleBarcodeRead,
+          onAppeared: console.info,
+          onDisappeared: console.info,
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 113,
+            columnNumber: 10
+          }
+        }));
       };
 
       return _this;
@@ -104305,13 +104596,134 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
   }(_react.default.Component);
 
   exports.default = App;
-},475,[1,26,37,39,36,56,2],"example/App.tsx");
+},475,[1,9,107,48,26,37,39,36,56,2,476],"example/App.tsx");
+__d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, exports, _dependencyMap) {
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  var _exportNames = {
+    connect: true,
+    disconnect: true,
+    getAvailableDevices: true,
+    aimOn: true,
+    aimOff: true
+  };
+  exports.aimOff = exports.aimOn = exports.getAvailableDevices = exports.disconnect = exports.connect = void 0;
+
+  var _reactNative = _$$_REQUIRE(_dependencyMap[0], "react-native");
+
+  var _Receiver = _$$_REQUIRE(_dependencyMap[1], "./Receiver");
+
+  Object.keys(_Receiver).forEach(function (key) {
+    if (key === "default" || key === "__esModule") return;
+    if (Object.prototype.hasOwnProperty.call(_exportNames, key)) return;
+    Object.defineProperty(exports, key, {
+      enumerable: true,
+      get: function get() {
+        return _Receiver[key];
+      }
+    });
+  });
+  var RNZebraBarcode = _reactNative.NativeModules.RNZebraBarcode;
+  var connect = RNZebraBarcode.connect;
+  exports.connect = connect;
+  var disconnect = RNZebraBarcode.disconnect;
+  exports.disconnect = disconnect;
+  var getAvailableDevices = RNZebraBarcode.getAvailableDevices;
+  exports.getAvailableDevices = getAvailableDevices;
+  var aimOn = RNZebraBarcode.aimOn;
+  exports.aimOn = aimOn;
+  var aimOff = RNZebraBarcode.aimOff;
+  exports.aimOff = aimOff;
+},476,[2,477],"src/index.ts");
+__d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, exports, _dependencyMap) {
+  var _interopRequireDefault = _$$_REQUIRE(_dependencyMap[0], "@babel/runtime/helpers/interopRequireDefault");
+
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  exports.Receiver = exports.EventName = void 0;
+
+  var _classCallCheck2 = _interopRequireDefault(_$$_REQUIRE(_dependencyMap[1], "@babel/runtime/helpers/classCallCheck"));
+
+  var _createClass2 = _interopRequireDefault(_$$_REQUIRE(_dependencyMap[2], "@babel/runtime/helpers/createClass"));
+
+  var _inherits2 = _interopRequireDefault(_$$_REQUIRE(_dependencyMap[3], "@babel/runtime/helpers/inherits"));
+
+  var _possibleConstructorReturn2 = _interopRequireDefault(_$$_REQUIRE(_dependencyMap[4], "@babel/runtime/helpers/possibleConstructorReturn"));
+
+  var _getPrototypeOf2 = _interopRequireDefault(_$$_REQUIRE(_dependencyMap[5], "@babel/runtime/helpers/getPrototypeOf"));
+
+  var _react = _interopRequireDefault(_$$_REQUIRE(_dependencyMap[6], "react"));
+
+  var _reactNative = _$$_REQUIRE(_dependencyMap[7], "react-native");
+
+  var _ = _$$_REQUIRE(_dependencyMap[8], ".");
+
+  function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = (0, _getPrototypeOf2.default)(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = (0, _getPrototypeOf2.default)(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return (0, _possibleConstructorReturn2.default)(this, result); }; }
+
+  function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+  var EventName;
+  exports.EventName = EventName;
+
+  (function (EventName) {
+    EventName["onBarcodeRead"] = "onBarcodeRead";
+    EventName["onAppeared"] = "onAppeared";
+    EventName["onDisappeared"] = "onDisappeared";
+  })(EventName || (exports.EventName = EventName = {}));
+
+  var Receiver = function (_React$Component) {
+    (0, _inherits2.default)(Receiver, _React$Component);
+
+    var _super = _createSuper(Receiver);
+
+    function Receiver() {
+      var _this;
+
+      (0, _classCallCheck2.default)(this, Receiver);
+
+      for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+        args[_key] = arguments[_key];
+      }
+
+      _this = _super.call.apply(_super, [this].concat(args));
+      _this.subscriptions = [];
+
+      _this.render = function () {
+        return null;
+      };
+
+      return _this;
+    }
+
+    (0, _createClass2.default)(Receiver, [{
+      key: "componentDidMount",
+      value: function componentDidMount() {
+        this.subscriptions.push(_reactNative.DeviceEventEmitter.addListener(EventName.onBarcodeRead, this.props.onBarcodeRead));
+        this.subscriptions.push(_reactNative.DeviceEventEmitter.addListener(EventName.onAppeared, this.props.onAppeared));
+        this.subscriptions.push(_reactNative.DeviceEventEmitter.addListener(EventName.onDisappeared, this.props.onDisappeared));
+      }
+    }, {
+      key: "componentWillUnmount",
+      value: function componentWillUnmount() {
+        (0, _.aimOff)();
+        this.subscriptions.forEach(function (s) {
+          return s.remove();
+        });
+      }
+    }]);
+    return Receiver;
+  }(_react.default.Component);
+
+  exports.Receiver = Receiver;
+},477,[1,26,27,37,39,36,56,2,476],"src/Receiver.tsx");
 __d(function(global, require, _aUnused, _bUnused, module, exports, _cUnused) {
   module.exports = {
   "name": "rnzebrabarcodeexample",
   "displayName": "rnzebrabarcodeexample"
 }
 ;
-},476,[],"example/app.json");
+},478,[],"example/app.json");
 __r(94);
 __r(0);

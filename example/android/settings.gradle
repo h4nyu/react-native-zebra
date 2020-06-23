@@ -1,3 +1,7 @@
 rootProject.name = 'rnzebrabarcode'
 apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesSettingsGradle(settings)
 include ':app'
+
+include ':react-native-zebra-barcode'
+project(':react-native-zebra-barcode').projectDir = new File(rootProject.projectDir, '../../android')
+

@@ -3,9 +3,9 @@ import {
   DeviceEventEmitter,
   EmitterSubscription,
 } from 'react-native';
-import { aimOff } from './api';
+import { aimOff } from '.';
 
-export interface IBarcodeEvent {
+export type Barcode = {
   barcodeType: number;
   data: string;
 }
@@ -17,11 +17,11 @@ export enum EventName {
 }
 
 export interface IProps {
-  onBarcodeRead: (event: IBarcodeEvent) => void;
+  onBarcodeRead: (event: Barcode) => void;
   onAppeared: (deviceName: string) => void;
   onDisappeared: (deviceName: string) => void;
 }
-export class ZebraBarcodeReceiver extends React.Component<IProps> {
+export class Receiver extends React.Component<IProps> {
   subscriptions: EmitterSubscription[] = []
   componentDidMount() {
     this.subscriptions.push(DeviceEventEmitter.addListener(EventName.onBarcodeRead, this.props.onBarcodeRead))

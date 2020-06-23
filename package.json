@@ -1,22 +1,31 @@
 {
   "name": "react-native-zebra-barcode",
-  "version": "0.1.1-rc0.3",
+  "version": "0.1.2-rc0.0",
   "description": "MIT",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
     "dist",
-    "android"
+    "android",
+    "dist"
   ],
   "scripts": {
     "build": "tsc",
-    "watch": "tsc -w",
-    "prepublishOnly": "npm run build"
+    "build-android": "sh build.sh",
+    "watch": "tsc -p tsconfig.example.json -w",
+    "prepublishOnly": "yarn build"
   },
   "keywords": [
     "react-native"
   ],
-  "author": "Xinyuan Yao",
+  "author": {
+    "name": "Xinyuan Yao",
+    "email": "yao.ntno@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/h4nyu/react-native-zebra-barcode.git"
+  },
   "license": "",
   "devDependencies": {
     "@react-native-community/cli-platform-android": "^4.10.1",

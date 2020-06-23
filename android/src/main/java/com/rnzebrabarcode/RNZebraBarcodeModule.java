@@ -86,92 +86,118 @@ public class RNZebraBarcodeModule extends ReactContextBaseJavaModule implements 
   public void dcssdkEventBarcode(byte[] barcodeData, int barcodeType, int scannerId) {
     Log.d(TAG, "Got Barcode");
     final WritableMap payload = new WritableNativeMap();
-    payload.putInt("barcodeType", barcodeType);
+    payload.putInt("type", barcodeType);
     payload.putString("data", new String(barcodeData));
     this.sendEvent("onBarcodeRead", payload);
   }
 
   @ReactMethod
   public void getAvailableDevices(final Promise promise){
-    try {
-      sdkHandler.dcssdkGetAvailableScannersList(this.devices);
-      final WritableArray payload = new WritableNativeArray();
-      for (DCSScannerInfo device : this.devices) {
-        payload.pushMap(this.toScannerDeviceMap(device));
-      }
-      promise.resolve(payload);
-    }
-    catch(Exception e){
-      promise.reject(e);
-    }
-  }
-
-  @ReactMethod
-  public void connect(final String deviceName, final Promise promise) {
-    Log.d(TAG, "connect to " + deviceName);
-    this.devices.stream()
-      .filter(x -> x.getScannerName().equals(deviceName))
-      .findFirst()
-      .ifPresent(x -> {
+    new Thread(new Runnable() {
+      @Override
+      public void run() {
         try {
-          Log.d(TAG, x.getScannerName());
-          final DCSSDKDefs.DCSSDK_RESULT result = sdkHandler.dcssdkEstablishCommunicationSession(x.getScannerID());
-          if (result == DCSSDKDefs.DCSSDK_RESULT.DCSSDK_RESULT_SUCCESS){
-            promise.resolve(deviceName);
-          }else if(result == DCSSDKDefs.DCSSDK_RESULT.DCSSDK_RESULT_SCANNER_NOT_AVAILABLE){
-            promise.reject("scanner not avalable");
-          }else if(result == DCSSDKDefs.DCSSDK_RESULT.DCSSDK_RESULT_SCANNER_ALREADY_ACTIVE){
-            promise.resolve(deviceName);
-          }else{
-            promise.reject("unable to connect to a scanner");
+          devices = new ArrayList<DCSScannerInfo>();
+          sdkHandler.dcssdkGetAvailableScannersList(devices);
+          final WritableArray payload = new WritableNativeArray();
+          for (DCSScannerInfo device : devices) {
+            payload.pushMap(toScannerDeviceMap(device));
           }
+          promise.resolve(payload);
         }
         catch(Exception e){
           promise.reject(e);
         }
-      });
+      }
+    }).start();
+  }
+
+  @ReactMethod
+  public void connect(final String deviceName, final Promise promise) {
+    new Thread(new Runnable() {
+      @Override
+      public void run() {
+        Log.d(TAG, "connect to " + deviceName);
+        devices.stream()
+          .filter(x -> x.getScannerName().equals(deviceName))
+          .findFirst()
+          .ifPresent(x -> {
+            try {
+              Log.d(TAG, x.getScannerName());
+              final DCSSDKDefs.DCSSDK_RESULT result = sdkHandler.dcssdkEstablishCommunicationSession(x.getScannerID());
+              if (result == DCSSDKDefs.DCSSDK_RESULT.DCSSDK_RESULT_SUCCESS){
+                promise.resolve(deviceName);
+              }else if(result == DCSSDKDefs.DCSSDK_RESULT.DCSSDK_RESULT_SCANNER_NOT_AVAILABLE){
+                promise.reject("scanner not avalable");
+              }else if(result == DCSSDKDefs.DCSSDK_RESULT.DCSSDK_RESULT_SCANNER_ALREADY_ACTIVE){
+                promise.resolve(deviceName);
+              }else{
+                promise.reject("unable to connect to a scanner");
+              }
+            }
+            catch(Exception e){
+              promise.reject(e);
+            }
+          });
+      }
+    }).start();
   }
 
   @ReactMethod
   public void disconnect(final String deviceName, final Promise promise) {
-    this.devices.stream()
-      .filter(x -> x.getScannerName().equals(deviceName))
-      .findFirst()
-      .ifPresent(x -> {
-        final DCSSDKDefs.DCSSDK_RESULT result = sdkHandler.dcssdkTerminateCommunicationSession(x.getScannerID());
-        if (result == DCSSDKDefs.DCSSDK_RESULT.DCSSDK_RESULT_SUCCESS) {
-          promise.resolve(deviceName);
-        }
-        else if (result == DCSSDKDefs.DCSSDK_RESULT.DCSSDK_RESULT_SCANNER_NOT_AVAILABLE){
-          promise.reject("Scanner is not available.");
-        }
-        else if (result == DCSSDKDefs.DCSSDK_RESULT.DCSSDK_RESULT_SCANNER_NOT_ACTIVE){
-          promise.reject("Never connected to a scanner.");
-        }
-        else{
-          promise.reject("Unable to disconnect from a scanner.");
-        }
-      });
+    new Thread(new Runnable() {
+      @Override
+      public void run() {
+        devices.stream()
+          .filter(x -> x.getScannerName().equals(deviceName))
+          .findFirst()
+          .ifPresent(x -> {
+            final DCSSDKDefs.DCSSDK_RESULT result = sdkHandler.dcssdkTerminateCommunicationSession(x.getScannerID());
+            if (result == DCSSDKDefs.DCSSDK_RESULT.DCSSDK_RESULT_SUCCESS) {
+              promise.resolve(deviceName);
+            }
+            else if (result == DCSSDKDefs.DCSSDK_RESULT.DCSSDK_RESULT_SCANNER_NOT_AVAILABLE){
+              promise.reject("Scanner is not available.");
+            }
+            else if (result == DCSSDKDefs.DCSSDK_RESULT.DCSSDK_RESULT_SCANNER_NOT_ACTIVE){
+              promise.reject("Never connected to a scanner.");
+            }
+            else{
+              promise.reject("Unable to disconnect from a scanner.");
+            }
+          });
+      }
+    }).start();
   }
 
   @ReactMethod
   public void aimOn(final Promise promise) {
-    this.getActiveDevice()
-      .ifPresent(x -> {
-        final String inXml = "<inArgs><scannerID>" + x.getScannerID() + "</scannerID></inArgs>";
-        this.executeCommand(DCSSDKDefs.DCSSDK_COMMAND_OPCODE.DCSSDK_DEVICE_AIM_ON, inXml);
-        promise.resolve(x.getScannerName());
-      });
+    new Thread(new Runnable() {
+      @Override
+      public void run() {
+        getActiveDevice()
+          .ifPresent(x -> {
+            final String inXml = "<inArgs><scannerID>" + x.getScannerID() + "</scannerID></inArgs>";
+            executeCommand(DCSSDKDefs.DCSSDK_COMMAND_OPCODE.DCSSDK_DEVICE_AIM_ON, inXml);
+            promise.resolve(x.getScannerName());
+          });
+      }
+    }).start();
   }
 
   @ReactMethod
   public void aimOff(final Promise promise) {
-    this.getActiveDevice()
-      .ifPresent(x -> {
-        final String inXml = "<inArgs><scannerID>" + x.getScannerID() + "</scannerID></inArgs>";
-        this.executeCommand(DCSSDKDefs.DCSSDK_COMMAND_OPCODE.DCSSDK_DEVICE_AIM_OFF, inXml);
-        promise.resolve(x.getScannerName());
-      });
+    new Thread(new Runnable() {
+      @Override
+      public void run() {
+        getActiveDevice()
+          .ifPresent(x -> {
+            final String inXml = "<inArgs><scannerID>" + x.getScannerID() + "</scannerID></inArgs>";
+            executeCommand(DCSSDKDefs.DCSSDK_COMMAND_OPCODE.DCSSDK_DEVICE_AIM_OFF, inXml);
+            promise.resolve(x.getScannerName());
+          });
+      }
+    }).start();
   }
 
   private Optional<DCSScannerInfo> getActiveDevice(){

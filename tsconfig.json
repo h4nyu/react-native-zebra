@@ -12,12 +12,11 @@
     "jsx": "react",
     "lib": ["es6"],
     "outDir": "./dist",
-    "skipLibCheck": true,
     "strict": true,
     "baseUrl": "./",
     "paths": {
       "~/*": ["src/*"],
-      "@h4nyu/react-native-zebra-rfid": ["src"]
+      "@h4nyu/react-native-zebra-barcode": ["src"]
     }
   },
   "include": [
