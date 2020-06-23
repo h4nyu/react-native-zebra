@@ -19,10 +19,15 @@
   "author": "Xinyuan Yao",
   "license": "",
   "devDependencies": {
-    "typescript": "^3.5.1",
-    "@types/react-native": "^0.60.30"
+    "@react-native-community/cli-platform-android": "^4.10.1",
+    "@types/react-native": "^0.60.30",
+    "babel-plugin-module-resolver": "^4.0.0",
+    "react": "^16.13.1",
+    "react-native": "^0.62.2",
+    "typescript": "^3.5.1"
   },
   "peerDependencies": {
-    "react-native": "^0.61.5"
+    "react": "^16.8.1",
+    "react-native": ">=0.60.0-rc.0 <1.0.x"
   }
 }

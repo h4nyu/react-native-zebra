@@ -7,6 +7,10 @@ services:
       args:
         - http_proxy
         - https_proxy
+        - GRADLE_OPTS
+        - SDK_OPTS
+    environment:
+      - GRADLE_OPTS
     command: npm start
     volumes:
       - .:/srv
