@@ -3,7 +3,7 @@
 
 ## Getting started
 
-`$ npm install @h4nyu/react-native-zebra-barcode --save`
+`$ npm install react-native-zebra-barcode --save`
 
 #### Android
 1. Check minSdkVersion in `android/build.gradle`:
@@ -23,7 +23,7 @@
     allprojects {
         repositories {
             ...
-            flatDir { dirs "$rootDir/../node_modules/@h4nyu/react-native-zebra-barcode/android/libs" }
+            flatDir { dirs "$rootDir/../node_modules/react-native-zebra-barcode/android/libs" }
         }
     }
   	```
