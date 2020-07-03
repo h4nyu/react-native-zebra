@@ -6,7 +6,7 @@ import {
 import { aimOff } from '.';
 
 export type Barcode = {
-  barcodeType: number;
+  type: number;
   data: string;
 }
 
