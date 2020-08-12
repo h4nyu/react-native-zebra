@@ -5,7 +5,7 @@ module.exports = {
       "module-resolver",
       {
         alias: {
-          "@h4nyu/react-native-zebra-barcode": "./src",
+          "@oniku/react-native-zebra-barcode": "./src",
         },
         cwd: "babelrc"
       }

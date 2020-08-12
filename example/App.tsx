@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, Button } from "react-native";
-import * as Zebra from "@h4nyu/react-native-zebra-barcode";
+import * as Zebra from "@oniku/react-native-zebra-barcode";
 
 const HLine = () => <View
   style={{

@@ -16,7 +16,7 @@
     "baseUrl": "./",
     "paths": {
       "~/*": ["src/*"],
-      "@h4nyu/react-native-zebra-barcode": ["src"]
+      "@oniku/react-native-zebra-barcode": ["src"]
     }
   },
   "include": [

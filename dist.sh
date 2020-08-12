@@ -1,1 +1,1 @@
-rm -rf dist && yarn build && yarn publish
+rm -rf dist && yarn build && yarn publish --access public
