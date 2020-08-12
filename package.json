@@ -1,5 +1,5 @@
 {
-  "name": "react-native-zebra-barcode",
+  "name": "@oniku/react-native-zebra-barcode",
   "version": "0.1.2-rc2",
   "description": "MIT",
   "main": "dist/index.js",
@@ -16,7 +16,9 @@
     "prepublishOnly": "yarn build"
   },
   "keywords": [
-    "react-native"
+    "react-native",
+    "barcode",
+    "zebra"
   ],
   "author": {
     "name": "Xinyuan Yao",
@@ -26,7 +28,7 @@
     "type": "git",
     "url": "git+https://github.com/h4nyu/react-native-zebra-barcode.git"
   },
-  "license": "",
+  "license": "MIT",
   "devDependencies": {
     "@react-native-community/cli-platform-android": "^4.10.1",
     "@types/react-native": "^0.60.30",
