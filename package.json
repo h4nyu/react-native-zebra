@@ -13,7 +13,7 @@
     "build": "tsc",
     "build-android": "sh build.sh",
     "watch": "tsc -p tsconfig.example.json -w",
-    "prepublishOnly": "yarn build"
+    "prepack": "yarn build"
   },
   "keywords": [
     "react-native",
