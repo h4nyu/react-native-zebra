@@ -29,7 +29,6 @@ export class Receiver extends React.Component<IProps> {
     this.subscriptions.push(DeviceEventEmitter.addListener(EventName.onDisappeared, this.props.onDisappeared))
   }
   componentWillUnmount() {
-    aimOff();
     this.subscriptions.forEach(s => s.remove());
   }
   render = () => { return null }
