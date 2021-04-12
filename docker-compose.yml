@@ -8,9 +8,10 @@ services:
         - http_proxy
         - https_proxy
         - GRADLE_OPTS
-        - SDK_OPTS
     environment:
       - GRADLE_OPTS
+      - http_proxy
+      - https_proxy
     command: npm start
     volumes:
       - .:/srv
