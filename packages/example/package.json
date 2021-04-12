@@ -1,0 +1,21 @@
+{
+  "name": "@oniku/react-native-zebra-barcode-example",
+  "private": true,
+  "version": "0.1.0",
+  "description": "MIT",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "build-android": "sh build.sh",
+    "watch": "tsc -p tsconfig.example.json -w",
+    "prepack": "yarn build"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "react-native": "^0.64.0",
+    "@oniku/react-native-zebra-barcode": "^0.1.0"
+  },
+  "devDependencies": {
+    "@types/react-native": "^0.64.2"
+  }
+}

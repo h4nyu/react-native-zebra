@@ -7,9 +7,10 @@ services:
       args:
         - http_proxy
         - https_proxy
-        - GRADLE_OPTS
+        - JAVA_OPTS
+        - SDK_OPTS
     environment:
-      - GRADLE_OPTS
+      - JAVA_OPTS
       - http_proxy
       - https_proxy
     command: npm start

@@ -1,33 +1,19 @@
 {
   "compilerOptions": {
-    "target": "esnext",
-    "allowJs": true,
-    "allowSyntheticDefaultImports": true,
+    "target": "es5",
     "experimentalDecorators": true,
-    "skipLibCheck": true,
-    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "downlevelIteration": true,
     "esModuleInterop": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "allowJs": false,
     "strict": true,
-    "noImplicitAny": true,
-    "declaration": true,
-    "jsx": "react",
-    "lib": ["es6"],
-    "outDir": "./dist",
-    "strict": true,
-    "baseUrl": "./",
-    "paths": {
-      "~/*": ["src/*"],
-      "@oniku/react-native-zebra-barcode": ["src"]
-    }
+    "isolatedModules": true,
+    "noImplicitAny": false,
+    "noImplicitThis": true,
+    "skipLibCheck": true,
+    "noEmit": true
   },
-  "include": [
-    "src/**/*"
-  ],
-  "exclude": [
-    "dist",
-    "node_modules",
-    "babel.config.js",
-    "metro.config.js",
-    "jest.config.js"
-  ]
+  "exclude": ["node_modules"]
 }
