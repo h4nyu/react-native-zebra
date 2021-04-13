@@ -19,6 +19,7 @@ import java.util.HashMap;
 import java.util.Optional;
 import android.util.Log;
 import androidx.annotation.Nullable;
+import androidx.annotation.NonNull;
 
 import com.zebra.scannercontrol.DCSScannerInfo;
 import com.zebra.scannercontrol.DCSSDKDefs;
@@ -52,6 +53,7 @@ public class RNZebraBarcodeModule extends ReactContextBaseJavaModule implements 
   }
 
   @Override
+  @NonNull
   public String getName() {
     return "RNZebraBarcode";
   }

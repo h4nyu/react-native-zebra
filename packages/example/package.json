@@ -6,13 +6,14 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc",
-    "start": "adb reverse tcp:$PORT tcp:$PORT && react-native start"
+    "start": "adb reverse tcp:$PORT tcp:$PORT && react-native start --reset-cache"
   },
   "license": "MIT",
   "dependencies": {
     "react-native": "^0.64.0"
   },
   "devDependencies": {
-    "@types/react-native": "^0.64.2"
+    "@types/react-native": "^0.64.2",
+    "@oniku/react-native-zebra-barcode": "^0.1.3"
   }
 }
