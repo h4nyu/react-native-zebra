@@ -11,9 +11,6 @@ import com.facebook.soloader.SoLoader;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
-// Added for this project
-import com.rnzebrabarcode.RNZebraBarcodePackage;
-
 
 
 public class MainApplication extends Application implements ReactApplication {
@@ -32,7 +29,6 @@ public class MainApplication extends Application implements ReactApplication {
           // Packages that cannot be autolinked yet can be added manually here, for example:
           // packages.add(new MyReactNativePackage());
           // Added for this project
-           packages.add(new RNZebraBarcodePackage());
           return packages;
         }
 

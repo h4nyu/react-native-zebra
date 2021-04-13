@@ -1,121 +1,115 @@
+/**
+ * Sample React Native App
+ * https://github.com/facebook/react-native
+ *
+ * Generated with the TypeScript template
+ * https://github.com/react-native-community/react-native-template-typescript
+ *
+ * @format
+ */
+
 import React from 'react';
-import { View, Text, Button } from "react-native";
-import * as Zebra from "@oniku/react-native-zebra-barcode";
+import {
+  SafeAreaView,
+  ScrollView,
+  StatusBar,
+  StyleSheet,
+  Text,
+  useColorScheme,
+  View,
+} from 'react-native';
 
-const HLine = () => <View
-  style={{
-    borderBottomColor: 'black',
-    borderBottomWidth: 1,
-    margin: 5,
-  }}
-/>
+import {
+  Colors,
+  DebugInstructions,
+  Header,
+  LearnMoreLinks,
+  ReloadInstructions,
+} from 'react-native/Libraries/NewAppScreen';
 
-type State = {
-  devices: Zebra.Device[];
-  deviceName: string | null;
-  barcode: Zebra.Barcode | null;
-}
+const Section: React.FC<{
+  title: string;
+}> = ({children, title}) => {
+  const isDarkMode = useColorScheme() === 'dark';
+  return (
+    <View style={styles.sectionContainer}>
+      <Text
+        style={[
+          styles.sectionTitle,
+          {
+            color: isDarkMode ? Colors.white : Colors.black,
+          },
+        ]}>
+        {title}
+      </Text>
+      <Text
+        style={[
+          styles.sectionDescription,
+          {
+            color: isDarkMode ? Colors.light : Colors.dark,
+          },
+        ]}>
+        {children}
+      </Text>
+    </View>
+  );
+};
 
-export default class App extends React.Component<{}, State> {
-  state: State = {
-    devices: [],
-    deviceName: null,
-    barcode: null,
+const App = () => {
+  const isDarkMode = useColorScheme() === 'dark';
+
+  const backgroundStyle = {
+    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
 
-  getAvailableDevices = async () => {
-    const devices = await Zebra.getAvailableDevices();
-    this.setState({
-      ...this.state,
-      devices,
-    });
-  };
+  return (
+    <SafeAreaView style={backgroundStyle}>
+      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
+      <ScrollView
+        contentInsetAdjustmentBehavior="automatic"
+        style={backgroundStyle}>
+        <Header />
+        <View
+          style={{
+            backgroundColor: isDarkMode ? Colors.black : Colors.white,
+          }}>
+          <Section title="Step One">
+            Edit <Text style={styles.highlight}>App.js</Text> to change this
+            screen and then come back to see your edits.
+          </Section>
+          <Section title="See Your Changes">
+            <ReloadInstructions />
+          </Section>
+          <Section title="Debug">
+            <DebugInstructions />
+          </Section>
+          <Section title="Learn More">
+            Read the docs to discover what to do next:
+          </Section>
+          <LearnMoreLinks />
+        </View>
+      </ScrollView>
+    </SafeAreaView>
+  );
+};
 
-  connect = async () => {
-    const {devices, deviceName} = this.state;
-    if (devices.length > 0) {
-      const deviceName = await Zebra.connect(devices[0].name);
-      this.setState({
-        ...this.state,
-        deviceName,
-      });
-    }
-  };
+const styles = StyleSheet.create({
+  sectionContainer: {
+    marginTop: 32,
+    paddingHorizontal: 24,
+  },
+  sectionTitle: {
+    fontSize: 24,
+    fontWeight: '600',
+  },
+  sectionDescription: {
+    marginTop: 8,
+    fontSize: 18,
+    fontWeight: '400',
+  },
+  highlight: {
+    fontWeight: '700',
+  },
+});
 
-  disconnect = async () => {
-    const {deviceName} = this.state;
-    if (deviceName !== null){
-      await Zebra.disconnect(deviceName);
-      this.setState({
-        ...this.state,
-        deviceName:null,
-      });
-    }
-  };
-
-  aimOn = async () => {
-    await Zebra.aimOn();
-  };
-  aimOff = async () => {
-    await Zebra.aimOff();
-  };
-
-  handleBarcodeRead = (barcode:Zebra.Barcode) => {
-      this.setState({
-        ...this.state,
-        barcode,
-      });
-  }
-
-  resetBarcode = () => {
-      this.setState({
-        ...this.state,
-        barcode:null,
-      });
-  }
-
-
-  render = () => {
-    const { devices, deviceName, barcode } = this.state;
-     return (
-       <View>
-         <Button title="getAvailableDevices" onPress={this.getAvailableDevices} />
-         {
-           devices.map(x =>
-             <View key={x.name}>
-               <Text>name: {x.name}</Text>
-               <Text>address: {x.address}</Text>
-             </View>
-           )
-         }
-         <HLine/>
-
-         <Button title="connect" onPress={this.connect} />
-         <Text>connectedDeviceName: {deviceName}</Text>
-         <HLine/>
-
-         <Button title="disconnect" onPress={this.disconnect} />
-         <HLine/>
-
-         <Button title="aimOn" onPress={this.aimOn} />
-         <HLine/>
-         <Button title="aimOff" onPress={this.aimOff} />
-         <HLine/>
-
-         <Button title="reset barcode" onPress={this.resetBarcode} />
-         <Text> barcode: </Text>
-         {
-           barcode ? <>
-             <Text> type: {barcode.type}</Text>
-             <Text> data: {barcode.data}</Text>
-           </>:null
-         }
-         <Zebra.Receiver
-           onBarcodeRead={this.handleBarcodeRead}
-           onAppeared={console.info}
-           onDisappeared={console.info}
-         />
-       </View>
-     )
-  }
-}
+export default App;
