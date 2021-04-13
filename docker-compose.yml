@@ -13,6 +13,8 @@ services:
       - JAVA_OPTS
       - http_proxy
       - https_proxy
+      - PORT
+      - ANDROID_ADB_SERVER_ADDRESS
     command: npm start
     volumes:
       - .:/srv
