@@ -11,6 +11,8 @@ import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.bridge.WritableNativeMap;
 import com.facebook.react.bridge.Callback;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
+import com.facebook.react.module.annotations.ReactModule;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -27,8 +29,9 @@ import com.zebra.scannercontrol.SDKHandler;
 import com.zebra.scannercontrol.FirmwareUpdateEvent;
 import com.zebra.scannercontrol.IDcsSdkApiDelegate;
 
-
+@ReactModule(name = RNZebraBarcodeModule.NAME)
 public class RNZebraBarcodeModule extends ReactContextBaseJavaModule implements IDcsSdkApiDelegate {
+  public static final String NAME = "RNZebraBarcode";
   private static final String TAG = "ReactNative";
   private final ReactApplicationContext reactContext;
   private SDKHandler sdkHandler; // Zebra SDK
@@ -55,7 +58,7 @@ public class RNZebraBarcodeModule extends ReactContextBaseJavaModule implements 
   @Override
   @NonNull
   public String getName() {
-    return "RNZebraBarcode";
+    return NAME;
   }
 
   public void dcssdkEventScannerAppeared(DCSScannerInfo device) {
