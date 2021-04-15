@@ -12,7 +12,8 @@
       "packages/*"
     ],
     "nohoist": [
-      "@oniku/react-native-zebra-barcode-example/**"
+      "@oniku/react-native-zebra-barcode-example/**",
+      "@oniku/react-native-zebra-barcode/**"
     ]
   },
   "version": "1.0.0",

@@ -3,7 +3,7 @@ import {
   DeviceEventEmitter,
   EmitterSubscription,
 } from 'react-native';
-import { aimOff } from '.';
+// import { aimOff } from '.';
 
 export type Barcode = {
   type: number;

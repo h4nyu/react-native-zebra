@@ -16,13 +16,11 @@ import {
   Button,
   View,
 } from 'react-native';
-import * as Zebra from "@oniku/react-native-zebra-barcode";
-
+import Zebra from "@oniku/react-native-zebra-barcode";
 
 const App = () => {
   const getAvailableDevices = async () => {
-    const devices = await Zebra.getAvailableDevices();
-    // console.log(devices)
+    console.log(Zebra)
   };
   return (
     <SafeAreaView>
@@ -30,7 +28,7 @@ const App = () => {
         contentInsetAdjustmentBehavior="automatic"
       >
         <View>
-          <Button title="getAvailableDevices" />
+          <Button title="getAvailableDevices" onPress={getAvailableDevices}/>
         </View>
       </ScrollView>
     </SafeAreaView>
