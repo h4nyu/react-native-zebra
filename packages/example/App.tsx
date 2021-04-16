@@ -21,8 +21,48 @@ import {
 import * as Zebra from "@oniku/react-native-zebra-barcode";
 
 const App = () => {
+  const [ devices, setDevices ] = React.useState<Zebra.Device[]>([])
+  const [ deviceName, setDeviceName ] = React.useState("")
   const getAvailableDevices = async () => {
-    console.log(Zebra)
+    try{
+      const devices = await Zebra.getAvailableDevices()
+      setDevices(devices)
+    }catch(e){
+      console.warn(e)
+    }
+  };
+
+  const connect = async (name:string) => {
+    try{
+      const connected = await Zebra.connect(name)
+      setDeviceName(connected)
+    }catch(e){
+      console.warn(e)
+    }
+  };
+  const disconnect = async () => {
+    try{
+      await Zebra.disconnect(deviceName)
+      setDeviceName("")
+    }catch(e){
+      console.warn(e)
+    }
+  };
+
+  const aimOn = async () => {
+    try{
+      await Zebra.aimOn()
+    }catch(e){
+      console.warn(e)
+    }
+  };
+
+  const aimOff = async () => {
+    try{
+      await Zebra.aimOff()
+    }catch(e){
+      console.warn(e)
+    }
   };
   return (
     <SafeAreaView>
@@ -35,6 +75,40 @@ const App = () => {
         >
           <Text> Get available devices </Text>
         </TouchableOpacity>
+        {
+          devices.map(d => (
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() => connect(d.name)}
+            >
+              <Text> {d.name} [{d.address}]</Text>
+            </TouchableOpacity>
+          ))
+        }
+        <Text> device: {deviceName}</Text>
+        {
+          deviceName !== "" && <View>
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() => disconnect()}
+            >
+              <Text> Disconnect </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() => aimOn()}
+            >
+              <Text> Aim on </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() => aimOff()}
+            >
+              <Text> Aim off </Text>
+            </TouchableOpacity>
+
+          </View>
+        }
       </ScrollView>
     </SafeAreaView>
   );
