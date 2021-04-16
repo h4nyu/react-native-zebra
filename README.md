@@ -28,13 +28,6 @@
     }
   	```
 
-1. Insert the following lines inside the application block in `android/app/src/debug/AndroidManifest.xml`:
-  	```xml
-    <application 
-        android:allowBackup="true"
-        tools:replace="android:allowBackup"
-        ... />
-  	```
 ## Usage
 
-see [example](./example/App.tsx).
+see [example](./packages/example/App.tsx).
