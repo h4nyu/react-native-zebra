@@ -15,18 +15,6 @@ module.exports = {
     path.resolve(__dirname, '../../'),
     path.resolve(__dirname),
   ],
-  resolver: {
-    // resolveRequest: (context, realModuleName, platform, moduleName) => {
-    //   // Resolve file path logic...
-    //   console.log(realModuleName)
-
-    //   return {
-    //     filePath: path.resolve(__dirname, "node_nodules", moduleName),
-    //     type: 'sourceFile',
-    //   };
-    // },
-    // blacklistRE: exclusionList([/barcode\/.*/])
-  },
   transformer: {
     getTransformOptions: async () => ({
       transform: {
