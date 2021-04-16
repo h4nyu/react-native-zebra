@@ -16,7 +16,6 @@
     "@oniku/react-native-zebra-barcode": "^0.1.3",
     "@types/react-native": "^0.64.2",
     "babel-plugin-module-resolver": "^4.0.0",
-    "metro-config": "^0.65.2",
     "react": "^17.0.2",
     "react-native": "^0.64.0"
   }

@@ -15,8 +15,10 @@ import {
   Text,
   Button,
   View,
+  TouchableOpacity,
+  StyleSheet,
 } from 'react-native';
-import Zebra from "@oniku/react-native-zebra-barcode";
+import * as Zebra from "@oniku/react-native-zebra-barcode";
 
 const App = () => {
   const getAvailableDevices = async () => {
@@ -27,13 +29,24 @@ const App = () => {
       <ScrollView
         contentInsetAdjustmentBehavior="automatic"
       >
-        <View>
-          <Button title="getAvailableDevices" onPress={getAvailableDevices}/>
-        </View>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => getAvailableDevices()}
+        >
+          <Text> Get available devices </Text>
+        </TouchableOpacity>
       </ScrollView>
     </SafeAreaView>
   );
 };
+const styles = StyleSheet.create({
+  button: {
+    alignItems: 'center',
+    backgroundColor: '#DDDDDD',
+    padding: 5,
+    margin: 5,
+  },
+});
 
 
 export default App;
