@@ -2,7 +2,6 @@ import React from "react"
 import { 
   NativeModules,
   NativeEventEmitter,
-  EmitterSubscription,
 } from 'react-native';
 const { RNZebraBarcode } = NativeModules;
 

@@ -15,6 +15,7 @@ services:
       - https_proxy
       - PORT
       - ANDROID_ADB_SERVER_ADDRESS
+      - YARN_RESIGSTRY
     command: yarn example start
     ports: 
       - "$PORT:8081"
