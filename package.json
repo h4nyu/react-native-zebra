@@ -5,14 +5,15 @@
     "lint": "eslint --fix --ext .tsx,.ts ./packages",
     "build": "gulp",
     "barcode": "yarn workspace @oniku/react-native-zebra-barcode",
-    "example": "yarn workspace @oniku/react-native-zebra-barcode-example"
+    "example": "yarn workspace @oniku/react-native-zebra-barcode-example",
+    "log": "adb logcat *:S ReactNative:V ReactNativeJS:V"
   },
   "workspaces": {
     "packages": [
       "packages/*"
     ],
     "nohoist": [
-      "**/react-native", 
+      "**/react-native",
       "**/react-native/**",
       "@oniku/react-native-zebra-barcode-example/@oniku/react-native-zebra-barcode"
     ]

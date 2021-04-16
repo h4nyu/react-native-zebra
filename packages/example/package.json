@@ -6,7 +6,7 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc",
-    "start": "adb reverse tcp:$PORT tcp:$PORT && react-native start -- --reset-cache"
+    "start": "adb reverse tcp:$PORT tcp:$PORT && react-native start --reset-cache"
   },
   "license": "MIT",
   "dependencies": {
@@ -17,6 +17,9 @@
     "@types/react-native": "^0.64.2",
     "babel-plugin-module-resolver": "^4.0.0",
     "react": "^17.0.2",
-    "react-native": "^0.64.0"
+    "react-native": "^0.64.0",
+    "@react-native-community/cli-platform-android": "^4.13.0",
+    "@types/react-native": "^0.64.2",
+    "typescript": "^4.1.2"
   }
 }

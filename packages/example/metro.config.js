@@ -1,33 +1,16 @@
 const path = require('path');
-// const blacklist = require('metro-config/src/defaults/blacklist');
-const escape = require('escape-string-regexp');
 const barcodePak = require('../barcode/package.json');
-
-const root = path.resolve(__dirname, '../../');
-console.log(root)
-
-const modules = Object.keys({
-  ...barcodePak.peerDependencies,
-});
 
 module.exports = {
   projectRoot: __dirname,
   watchFolders: [
-    root,
+    path.resolve(__dirname, "../../"),
   ],
-  // We need to make sure that only one version is loaded for peerDependencies
-  // So we blacklist them at the root, and alias them to the versions in example's node_modules
   resolver: {
-    // blacklistRE: blacklist(
-    //   modules.map(m => new RegExp(`^${escape(path.join(root, 'node_modules', m))}\\/.*$`))
-    // ),
-
-    extraNodeModules: modules.reduce((acc, name) => {
-      acc[name] = path.join(__dirname, 'node_modules', name);
-      return acc;
-    }, {}),
+    extraNodeModules: {
+      [barcodePak.name]: path.resolve(__dirname, "node_nodules", barcodePak.name),
+    },
   },
-
   transformer: {
     getTransformOptions: async () => ({
       transform: {

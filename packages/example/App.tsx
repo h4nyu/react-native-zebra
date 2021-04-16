@@ -20,6 +20,7 @@ import {
 } from 'react-native';
 import * as Zebra from "@oniku/react-native-zebra-barcode";
 
+
 const App = () => {
   const [ devices, setDevices ] = React.useState<Zebra.Device[]>([])
   const [ deviceName, setDeviceName ] = React.useState("")
@@ -80,6 +81,7 @@ const App = () => {
             <TouchableOpacity
               style={styles.button}
               onPress={() => connect(d.name)}
+              key={d.address}
             >
               <Text> {d.name} [{d.address}]</Text>
             </TouchableOpacity>
@@ -106,6 +108,7 @@ const App = () => {
             >
               <Text> Aim off </Text>
             </TouchableOpacity>
+            <Zebra.Receiver onBarcodeRead={console.log} />
 
           </View>
         }

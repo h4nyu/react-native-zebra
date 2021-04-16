@@ -75,7 +75,6 @@ public class RNZebraBarcodeModule extends ReactContextBaseJavaModule implements 
   }
 
   public void dcssdkEventCommunicationSessionEstablished(DCSScannerInfo device) {
-    Log.d(TAG, "onEstablished " + device.getScannerName());
     this.sendEvent("onEstablished", device.getScannerName());
   }
 
@@ -84,13 +83,11 @@ public class RNZebraBarcodeModule extends ReactContextBaseJavaModule implements 
       .filter(x -> x.getScannerID() == deviceId)
       .findFirst()
       .ifPresent(x -> {
-        Log.d(TAG, "onTerminated " + x.getScannerName());
         this.sendEvent("onTerminated", x.getScannerName());
       });
   }
 
   public void dcssdkEventBarcode(byte[] barcodeData, int barcodeType, int scannerId) {
-    Log.d(TAG, "Got Barcode");
     final WritableMap payload = new WritableNativeMap();
     payload.putInt("type", barcodeType);
     payload.putString("data", new String(barcodeData));
@@ -225,10 +222,12 @@ public class RNZebraBarcodeModule extends ReactContextBaseJavaModule implements 
   }
 
   private void sendEvent(String eventName, @Nullable WritableMap params) {
+    Log.d(TAG,  eventName + ":" + params.toString());
     this.reactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit(eventName, params);
   }
 
   private void sendEvent(String eventName, @Nullable String params) {
+    Log.d(TAG,  eventName + ":" + params);
     this.reactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit(eventName, params);
   }
 
