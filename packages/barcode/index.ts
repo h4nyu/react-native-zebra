@@ -33,14 +33,20 @@ export const Receiver = (props: {
   onAppeared?: (deviceName: string) => void;
   onDisappeared?: (deviceName: string) => void;
 })=> {
-  // React.useEffect(() => {
-  //   const listeners:any[] = []
-  //   if(props.onBarcodeRead){
-  //     listeners.push(eventEmitter.addListener(EventName.onBarcodeRead, console.log))
-  //   }
-  //   return () => {
-  //     listeners.forEach(x => x.remove())
-  //   }
-  // }, [])
+  React.useEffect(() => {
+    const listeners:any[] = []
+    if(props.onBarcodeRead){
+      listeners.push(eventEmitter.addListener(EventName.onBarcodeRead, props.onBarcodeRead))
+    }
+    if(props.onAppeared){
+      listeners.push(eventEmitter.addListener(EventName.onAppeared, props.onAppeared))
+    }
+    if(props.onDisappeared){
+      listeners.push(eventEmitter.addListener(EventName.onDisappeared, props.onDisappeared))
+    }
+    return () => {
+      listeners.forEach(x => x.remove())
+    }
+  }, [])
   return null
 }

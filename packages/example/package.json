@@ -9,14 +9,9 @@
     "start": "adb reverse tcp:$PORT tcp:$PORT && react-native start --reset-cache"
   },
   "license": "MIT",
-  "dependencies": {
-    "react-native": "^0.64.0"
-  },
   "devDependencies": {
-    "@oniku/react-native-zebra-barcode": "^0.1.3",
     "@types/react-native": "^0.64.2",
     "babel-plugin-module-resolver": "^4.0.0",
-    "react": "^17.0.2",
     "react-native": "^0.64.0",
     "@react-native-community/cli-platform-android": "^4.13.0",
     "@types/react-native": "^0.64.2",

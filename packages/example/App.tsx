@@ -24,6 +24,7 @@ import * as Zebra from "@oniku/react-native-zebra-barcode";
 const App = () => {
   const [ devices, setDevices ] = React.useState<Zebra.Device[]>([])
   const [ deviceName, setDeviceName ] = React.useState("")
+  const [ barcode, setBarcode ] = React.useState<Zebra.Barcode | undefined>(undefined)
   const getAvailableDevices = async () => {
     try{
       const devices = await Zebra.getAvailableDevices()
@@ -65,6 +66,7 @@ const App = () => {
       console.warn(e)
     }
   };
+
   return (
     <SafeAreaView>
       <ScrollView
@@ -88,6 +90,8 @@ const App = () => {
           ))
         }
         <Text> device: {deviceName}</Text>
+        <Text> barcode type: {barcode?.type}</Text>
+        <Text> barcode data: {barcode?.data}</Text>
         {
           deviceName !== "" && <View>
             <TouchableOpacity
@@ -108,7 +112,7 @@ const App = () => {
             >
               <Text> Aim off </Text>
             </TouchableOpacity>
-            <Zebra.Receiver onBarcodeRead={console.log} />
+            <Zebra.Receiver onBarcodeRead={b => setBarcode(b)} />
 
           </View>
         }
