@@ -1,15 +1,13 @@
 {
   "name": "@oniku/react-native-zebra-barcode",
-  "version": "0.1.3",
+  "version": "0.1.5",
   "description": "MIT",
-  "files": [
-    "android"
-  ],
   "scripts": {
     "build": "tsc",
     "build-android": "sh build.sh",
     "watch": "tsc -p tsconfig.example.json -w",
-    "prepack": "yarn build"
+    "prepack": "yarn tsc --noEmit false",
+    "postpack": "yarn tsc --build --clean"
   },
   "keywords": [
     "react-native",
