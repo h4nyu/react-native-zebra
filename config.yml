@@ -24,11 +24,6 @@ jobs:
           command: |
             docker-compose run --rm app yarn build
 
-      - run:
-          name: Build Demo App
-          command: |
-            docker-compose run --rm app yarn build-android
-
 
 workflows:
   main:

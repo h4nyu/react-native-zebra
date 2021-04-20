@@ -1,15 +1,23 @@
 {
-  "name": "@oniku/react-native-zebra-barcode-example",
+  "name": "example",
   "private": true,
   "version": "0.1.0",
   "description": "MIT",
   "main": "index.js",
   "scripts": {
     "build": "tsc",
-    "start": "adb reverse tcp:$PORT tcp:$PORT && react-native start --reset-cache"
+    "start": "yarn reverse:metro && react-native start --reset-cache",
+    "reverse:metro": "adb reverse tcp:$METRO_PORT tcp:$METRO_PORT",
+    "devmenu":" adb shell input keyevent 82",
+    "reload":" yarn devmenu && adb shell input keyevent 66 && adb shell input keyevent 66",
+    "assembleDebug":"cd android && ./gradlew assembleDebug",
+    "gradle":"cd android && ./gradlew",
+    "log": "adb logcat *:S ReactNative:V ReactNativeJS:V",
+    "installDebug":" yarn assembleDebug && adb install -r android/app/build/outputs/apk/debug/app-debug.apk"
   },
   "license": "MIT",
   "devDependencies": {
+    "@oniku/react-native-zebra-barcode":"^0.1.5",
     "@types/react-native": "^0.64.2",
     "babel-plugin-module-resolver": "^4.0.0",
     "react-native": "^0.64.0",

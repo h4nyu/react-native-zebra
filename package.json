@@ -4,15 +4,17 @@
   "scripts": {
     "lint": "eslint --fix --ext .tsx,.ts ./packages",
     "build": "gulp",
+    "example": "yarn workspace example",
     "barcode": "yarn workspace @oniku/react-native-zebra-barcode",
-    "example": "yarn workspace @oniku/react-native-zebra-barcode-example",
     "log": "adb logcat *:S ReactNative:V ReactNativeJS:V"
   },
   "workspaces": {
     "packages": [
       "packages/*"
     ],
-    "nohoist": [ "**/react-native", "**/react-native/**"]
+    "nohoist": [
+      "example/**"
+    ]
   },
   "version": "1.0.0",
   "license": "MIT",
