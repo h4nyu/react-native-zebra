@@ -20,7 +20,6 @@ import {
 } from 'react-native';
 import * as Zebra from "@oniku/react-native-zebra-barcode";
 
-
 const App = () => {
   const [ devices, setDevices ] = React.useState<Zebra.Device[]>([])
   const [ deviceName, setDeviceName ] = React.useState("")
