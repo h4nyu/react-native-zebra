@@ -8,21 +8,22 @@
     "build": "tsc",
     "start": "yarn reverse:metro && react-native start --reset-cache",
     "reverse:metro": "adb reverse tcp:$METRO_PORT tcp:$METRO_PORT",
-    "devmenu":" adb shell input keyevent 82",
-    "reload":" yarn devmenu && adb shell input keyevent 66 && adb shell input keyevent 66",
-    "assembleDebug":"cd android && ./gradlew assembleDebug",
-    "gradle":"cd android && ./gradlew",
+    "devmenu": " adb shell input keyevent 82",
+    "reload": " yarn devmenu && adb shell input keyevent 66 && adb shell input keyevent 66",
+    "assembleDebug": "cd android && ./gradlew assembleDebug",
+    "gradle": "cd android && ./gradlew",
     "log": "adb logcat *:S ReactNative:V ReactNativeJS:V",
-    "installDebug":" yarn assembleDebug && adb install -r android/app/build/outputs/apk/debug/app-debug.apk"
+    "installDebug": " yarn assembleDebug && adb install -r android/app/build/outputs/apk/debug/app-debug.apk"
   },
   "license": "MIT",
   "devDependencies": {
-    "@oniku/react-native-zebra-barcode":"^0.1.5",
-    "@types/react-native": "^0.64.2",
+    "@oniku/react-native-zebra-barcode": "^0.1.5",
+    "@react-native-community/cli-platform-android": "^5.0.1",
+    "@types/jest": "^26.0.23",
+    "@types/react": "^17.0.11",
+    "@types/react-native": "^0.64.10",
     "babel-plugin-module-resolver": "^4.0.0",
     "react-native": "^0.64.0",
-    "@react-native-community/cli-platform-android": "^4.13.0",
-    "@types/react-native": "^0.64.2",
-    "typescript": "^4.1.2"
+    "typescript": "^4.3.2"
   }
 }
