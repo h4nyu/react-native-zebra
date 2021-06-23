@@ -23,7 +23,7 @@ jobs:
       - run:
           name: Tpye check App
           command: |
-            docker-compose run --rm app yarn build
+            docker-compose run --rm app ex build
 
       - run:
           name: Build Demo App
