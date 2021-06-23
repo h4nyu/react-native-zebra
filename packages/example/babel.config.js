@@ -1,5 +1,4 @@
 const path = require('path');
-const barcodePak = require('../barcode/package.json');
 
 module.exports = {
   presets: ['module:metro-react-native-babel-preset'],

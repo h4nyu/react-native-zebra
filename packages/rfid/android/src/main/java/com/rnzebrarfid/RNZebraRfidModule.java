@@ -10,10 +10,12 @@ import com.facebook.react.bridge.WritableNativeArray;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.bridge.WritableNativeMap;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
+import com.facebook.react.module.annotations.ReactModule;
 
 import android.os.AsyncTask;
 import android.util.Log;
 import androidx.annotation.Nullable;
+import androidx.annotation.NonNull;
 
 import com.zebra.rfid.api3.RfidEventsListener;
 import com.zebra.rfid.api3.Antennas;
@@ -54,9 +56,10 @@ import java.util.HashMap;
 import android.widget.Toast;
 
 
-
+@ReactModule(name = RNZebraRfidModule.NAME)
 public class RNZebraRfidModule extends ReactContextBaseJavaModule implements RfidEventsListener {
-  private final String TAG = "ReactNative";
+  public static final String NAME = "RNZebraRfid";
+  private static final String TAG = "ReactNative";
   private final ReactApplicationContext reactContext;
 
   private Readers readers;
@@ -71,8 +74,9 @@ public class RNZebraRfidModule extends ReactContextBaseJavaModule implements Rfi
   }
 
   @Override
+  @NonNull
   public String getName() {
-    return "RNZebraRfid";
+    return NAME;
   }
 
   @ReactMethod
@@ -193,7 +197,94 @@ public class RNZebraRfidModule extends ReactContextBaseJavaModule implements Rfi
     }).start();
   }
 
+  @ReactMethod
+  public void startInventory(Promise promise) {
+    new Thread(new Runnable() {
+      @Override
+      public void run() {
+        performInventory();
+        promise.resolve(null);
+        return;
+      }
+    }).start();
+  }
 
+  @ReactMethod
+  public void stopInventory(Promise promise) {
+    new Thread(new Runnable() {
+      @Override
+      public void run() {
+        stopInventory();
+        promise.resolve(null);
+        return;
+      }
+    }).start();
+  }
+
+  @ReactMethod
+  public void writeEPCData(final String targetId, final String tagId, Promise promise) {
+    new Thread(new Runnable() {
+      @Override
+      public void run() {
+        final RFIDReader reader = getRFIDReader().orElse(null);
+        if(reader != null){
+          TagAccess.WriteAccessParams writeAccessParams = reader.Actions.TagAccess.new WriteAccessParams();
+          writeAccessParams.setAccessPassword(0);
+          writeAccessParams.setMemoryBank(MEMORY_BANK.MEMORY_BANK_EPC);
+          writeAccessParams.setOffset(2);
+          writeAccessParams.setWriteData(tagId);
+          writeAccessParams.setWriteDataLength(tagId.length() / 4);
+          try {
+            reader.Actions.TagAccess.blockWriteWait(targetId, writeAccessParams, null, null);
+            promise.resolve(tagId);
+            return;
+          } catch (InvalidUsageException e) {
+            e.printStackTrace();
+            promise.reject(e);
+            return;
+          } catch (OperationFailureException e) {
+            e.printStackTrace();
+            Log.d(TAG,"error: " + e.getVendorMessage());
+            promise.reject(e);
+            return;
+          }
+        };
+      }
+    }).start();
+  }
+
+  @ReactMethod
+  public void getTIDData(final String tagId, Promise promise) {
+    new Thread(new Runnable() {
+      @Override
+      public void run() {
+        final RFIDReader reader = getRFIDReader().orElse(null);
+        final WritableArray payload = new WritableNativeArray();
+        if(reader != null){
+          TagAccess.ReadAccessParams readAccessParams = reader.Actions.TagAccess.new ReadAccessParams();
+          readAccessParams.setCount(0);
+          readAccessParams.setMemoryBank(MEMORY_BANK.MEMORY_BANK_TID);
+          readAccessParams.setOffset(0);
+          try {
+            TagData tagData = reader.Actions.TagAccess.readWait(tagId, readAccessParams, null);
+            payload.pushString(tagData.getMemoryBankData());
+            sendEvent("onTidRead", payload);
+            promise.resolve(tagId);
+            return;
+          } catch (InvalidUsageException e) {
+            e.printStackTrace();
+            promise.reject(e);
+            return;
+          } catch (OperationFailureException e) {
+            e.printStackTrace();
+            Log.d(TAG,"error: " + e.getVendorMessage());
+            promise.reject(e);
+            return;
+          }
+        };
+      }
+    }).start();
+  }
 
   private void initRFIDReader(RFIDReader rfidReader) {
     try {
@@ -215,12 +306,14 @@ public class RNZebraRfidModule extends ReactContextBaseJavaModule implements Rfi
 
   public void eventStatusNotify(RfidStatusEvents event) {
     Log.d(TAG, "Status Notification: " + event.StatusEventData.getStatusEventType());
+
+    final WritableMap payload = new WritableNativeMap();
     if (event.StatusEventData.HandheldTriggerEventData.getHandheldEvent() == HANDHELD_TRIGGER_EVENT_TYPE.HANDHELD_TRIGGER_PRESSED) {
-      this.performInventory();
+      this.sendEvent("onTriggerPressed", payload);
     }
 
     if (event.StatusEventData.HandheldTriggerEventData.getHandheldEvent() == HANDHELD_TRIGGER_EVENT_TYPE.HANDHELD_TRIGGER_RELEASED) {
-      this.stopInventory();
+      this.sendEvent("onTriggerReleased", payload);
     }
   }
 
@@ -233,6 +326,7 @@ public class RNZebraRfidModule extends ReactContextBaseJavaModule implements Rfi
       }
     });
   }
+
 
   public void eventReadNotify(RfidReadEvents event) {
     this.getRFIDReader().ifPresent(x -> {

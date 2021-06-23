@@ -80,7 +80,7 @@ dependencies {
     //noinspection GradleDynamicVersion
     implementation 'com.facebook.react:react-native:+'  // From node_modules
     implementation 'androidx.localbroadcastmanager:localbroadcastmanager:1.0.0'
-    implementation(name:'API3_LIB-release-2.0.1.27', ext:'aar')
+    implementation(name:'API3_LIB-release-2.0.1.34', ext:'aar')
 }
 
 def configureReactNativePom(def pom) {

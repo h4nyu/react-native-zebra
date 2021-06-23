@@ -16,7 +16,7 @@ services:
       - METRO_PORT
       - ANDROID_ADB_SERVER_ADDRESS
       - YARN_REGISTRY
-    command: yarn example start
+    command: yarn ex start
     ports: 
       - "$METRO_PORT:8081"
     volumes:

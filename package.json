@@ -4,7 +4,7 @@
   "scripts": {
     "lint": "eslint --fix --ext .tsx,.ts ./packages",
     "build": "gulp",
-    "example": "yarn workspace example",
+    "ex": "yarn workspace example",
     "barcode": "yarn workspace @oniku/react-native-zebra-barcode",
     "rfid": "yarn workspace @oniku/react-native-zebra-rfid",
     "log": "adb logcat *:S ReactNative:V ReactNativeJS:V"

@@ -1,33 +1,36 @@
 import React from 'react';
 import {
   NativeModules,
-  DeviceEventEmitter,
-  EmitterSubscription,
+  NativeEventEmitter,
 } from 'react-native';
+const { RNZebraRfid } = NativeModules;
 
 export enum EventName {
   onRfidRead = "onRfidRead",
   onAppeared = "onAppeared",
   onDisappeared = "onDisappeared",
 }
-
-interface IProps {
-  onRfidRead: (tagIds: string[]) => void;
-  onAppeared: (deviceName: string) => void;
-  onDisappeared: (deviceName: string) => void;
-}
-
-export class Receiver extends React.Component<IProps> {
-  subscriptions: EmitterSubscription[] = [];
-
-  componentDidMount() {
-    this.subscriptions.push(DeviceEventEmitter.addListener(EventName.onRfidRead, this.props.onRfidRead));
-    this.subscriptions.push(DeviceEventEmitter.addListener(EventName.onAppeared, this.props.onAppeared));   
-    this.subscriptions.push(DeviceEventEmitter.addListener(EventName.onDisappeared, this.props.onAppeared));    
-  }
-  componentWillUnmount() {
-    this.subscriptions.forEach(x => x.remove());
-  }
-  render = () => { return null }
+const eventEmitter = new NativeEventEmitter(RNZebraRfid);
+export const Receiver = (props: {
+  onRfidRead?: (tagIds: string[]) => void;
+  onAppeared?: (deviceName: string) => void;
+  onDisappeared?: (deviceName: string) => void;
+}) => {
+  React.useEffect(() => {
+    const listeners:any[] = []
+    if(props.onRfidRead){
+      listeners.push(eventEmitter.addListener(EventName.onRfidRead, props.onRfidRead))
+    }
+    if(props.onAppeared){
+      listeners.push(eventEmitter.addListener(EventName.onAppeared, props.onAppeared))
+    }
+    if(props.onDisappeared){
+      listeners.push(eventEmitter.addListener(EventName.onDisappeared, props.onDisappeared))
+    }
+    return () => {
+      listeners.forEach(x => x.remove())
+    }
+  }, [])
+  return null
 }
 
