@@ -28,7 +28,7 @@ jobs:
       - run:
           name: Build Demo App
           command: |
-            docker-compose run --rm app yarn build-android
+            docker-compose run --rm app yarn ex gradle assembleRelease
 
 
 workflows:
