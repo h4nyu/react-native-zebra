@@ -17,7 +17,7 @@ jobs:
       - run:
           name: Build Images
           command: |
-            docker-compose build --parallel
+            docker-compose build
             docker-compose run --rm app yarn install
 
       - run:
