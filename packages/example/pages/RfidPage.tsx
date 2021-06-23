@@ -12,12 +12,6 @@ import {
 import * as Barcode from "@oniku/react-native-zebra-barcode";
 import * as Rfid from "@oniku/react-native-zebra-rfid";
 
-
-// let startTime = Date.now()
-// let endTime = Date.now()
-// let tidStartTime = Date.now()
-// let tidEndTime = Date.now()
-
 const RfidPage = () => {
   const [ devices, setDevices ] = React.useState<Rfid.Device[]>([])
   const [ deviceName, setDeviceName ] = React.useState("")
@@ -71,7 +65,6 @@ const RfidPage = () => {
 
   const getEPCData = async () => {
     try{
-      // startTime = Date.now()
       await startInventory()
     }catch(e){
       console.warn(e)
@@ -90,7 +83,6 @@ const RfidPage = () => {
 
   const getTIDData = async (tagIds: string[]) => {
     try{
-      // tidStartTime = Date.now()
       for (const t of tagIds) {
         const tidData = await Rfid.getTIDData(t)
       }
@@ -221,11 +213,9 @@ const RfidPage = () => {
             })}
             <Rfid.Receiver 
               onRfidRead={t => {
-                // endTime = Date.now()
                 addRfid(t)
               }}
               onTidRead={t => {
-                // tidEndTime = Date.now()
                 addTid(t)
               }}
               onTriggerPressed={() => {

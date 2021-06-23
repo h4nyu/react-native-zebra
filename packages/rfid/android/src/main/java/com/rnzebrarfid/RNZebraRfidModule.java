@@ -238,13 +238,8 @@ public class RNZebraRfidModule extends ReactContextBaseJavaModule implements Rfi
             reader.Actions.TagAccess.blockWriteWait(targetId, writeAccessParams, null, null);
             promise.resolve(tagId);
             return;
-          } catch (InvalidUsageException e) {
+          } catch (InvalidUsageException | OperationFailureException e) {
             e.printStackTrace();
-            promise.reject(e);
-            return;
-          } catch (OperationFailureException e) {
-            e.printStackTrace();
-            Log.d(TAG,"error: " + e.getVendorMessage());
             promise.reject(e);
             return;
           }
@@ -271,13 +266,8 @@ public class RNZebraRfidModule extends ReactContextBaseJavaModule implements Rfi
             sendEvent("onTidRead", payload);
             promise.resolve(tagId);
             return;
-          } catch (InvalidUsageException e) {
+          } catch (InvalidUsageException | OperationFailureException e) {
             e.printStackTrace();
-            promise.reject(e);
-            return;
-          } catch (OperationFailureException e) {
-            e.printStackTrace();
-            Log.d(TAG,"error: " + e.getVendorMessage());
             promise.reject(e);
             return;
           }
