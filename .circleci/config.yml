@@ -13,6 +13,7 @@ jobs:
             chmod +x ~/docker-compose
             sudo mv ~/docker-compose /usr/local/bin/docker-compose
             docker-compose -v
+            docker-compose config
       - run:
           name: Build Images
           command: |
