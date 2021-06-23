@@ -15,19 +15,11 @@ jobs:
             docker-compose -v
             docker-compose config
       - run:
-          name: Build Images
+          name: Build Demo
           command: |
             docker-compose build
             docker-compose run --rm app yarn install
-
-      - run:
-          name: Tpye check App
-          command: |
             docker-compose run --rm app ex build
-
-      - run:
-          name: Build Demo App
-          command: |
             docker-compose run --rm app yarn ex gradle assembleRelease
 
 
