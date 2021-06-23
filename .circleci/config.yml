@@ -19,16 +19,17 @@ jobs:
           command: |
             docker-compose build
             docker-compose run --rm app yarn install
+            docker-compose up -d app
             
       - run:
           name: Tpye check App
           command: |
-            docker-compose run --rm app yarn ex build
+            docker-compose exec app yarn ex build
 
       - run:
           name: Build Demo App
           command: |
-            docker-compose run --rm app yarn ex gradle assembleRelease
+            docker-compose exec app yarn ex gradle assembleRelease
 
 
 
