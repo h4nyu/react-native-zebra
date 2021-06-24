@@ -1,9 +1,9 @@
 
-# @oniku/react-native-zebra-barcode
+# @oniku/react-native-zebra-rfid
 
 ## Getting started
 
-`$ npm install @oniku/react-native-zebra-barcode --save`
+`$ npm install @oniku/react-native-zebra-rfid --save`
 
 #### Android
 1. Check minSdkVersion in `android/build.gradle`:
@@ -23,7 +23,7 @@
     allprojects {
         repositories {
             ...
-            flatDir { dirs "$rootDir/../node_modules/@oniku/react-native-zebra-barcode/android/libs" }
+            flatDir { dirs "$rootDir/../node_modules/@oniku/react-native-zebra-rfid/android/libs" }
         }
     }
   	```
