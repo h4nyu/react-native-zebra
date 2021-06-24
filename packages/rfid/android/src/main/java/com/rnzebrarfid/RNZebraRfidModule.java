@@ -46,6 +46,7 @@ import com.zebra.rfid.api3.MEMORY_BANK;
 import com.zebra.rfid.api3.SESSION;
 import com.zebra.rfid.api3.INVENTORY_STATE;
 import com.zebra.rfid.api3.SL_FLAG;
+import com.zebra.rfid.api3.DYNAMIC_POWER_OPTIMIZATION;
 
 import java.util.ArrayList;
 import java.util.List; 
@@ -235,7 +236,7 @@ public class RNZebraRfidModule extends ReactContextBaseJavaModule implements Rfi
           writeAccessParams.setWriteData(tagId);
           writeAccessParams.setWriteDataLength(tagId.length() / 4);
           try {
-            reader.Actions.TagAccess.blockWriteWait(targetId, writeAccessParams, null, null);
+            reader.Actions.TagAccess.writeWait(targetId, writeAccessParams, null, null);
             promise.resolve(tagId);
             return;
           } catch (InvalidUsageException | OperationFailureException e) {
@@ -281,6 +282,7 @@ public class RNZebraRfidModule extends ReactContextBaseJavaModule implements Rfi
       rfidReader.Events.addEventsListener(this);
       rfidReader.Events.setHandheldEvent(true);
       rfidReader.Events.setTagReadEvent(true);
+      rfidReader.Config.setDPOState(DYNAMIC_POWER_OPTIMIZATION.DISABLE);
     } catch (InvalidUsageException | OperationFailureException e) {
       e.printStackTrace();
       Log.d(TAG,"ConfigureReader error");
