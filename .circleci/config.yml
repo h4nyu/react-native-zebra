@@ -19,12 +19,11 @@ jobs:
           command: |
             docker-compose build
             docker-compose run --rm app yarn install
-            docker-compose up -d app
 
       - run:
           name: Build Demo App
           command: |
-            docker-compose exec app yarn ex gradle assembleRelease
+            docker-compose run --rm app yarn ex gradle assembleRelease
 
 
 
