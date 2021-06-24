@@ -19,7 +19,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/h4nyu/react-native-zebra-barcode.git"
+    "url": "git+https://github.com/h4nyu/react-native-zebra.git"
   },
   "license": "MIT",
   "devDependencies": {

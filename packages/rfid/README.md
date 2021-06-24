@@ -30,4 +30,4 @@
 
 ## Usage
 
-see [example](./packages/example/App.tsx).
+see [example](../packages/example/pages/RfidPage.tsx).
