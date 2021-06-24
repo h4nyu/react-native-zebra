@@ -1,6 +1,6 @@
 {
   "name": "@oniku/react-native-zebra-rfid",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "MIT",
   "scripts": {
     "build": "tsc",
