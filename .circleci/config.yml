@@ -15,7 +15,7 @@ jobs:
             docker-compose -v
             docker-compose config
       - run:
-          name: Build Demo
+          name: Build Image
           command: |
             docker-compose build
             docker-compose run --rm app yarn install
