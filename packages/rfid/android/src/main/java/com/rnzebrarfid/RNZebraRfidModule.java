@@ -223,7 +223,7 @@ public class RNZebraRfidModule extends ReactContextBaseJavaModule implements Rfi
   }
 
   @ReactMethod
-  public void writeEPCData(final String targetId, final String tagId, Promise promise) {
+  public void writeEPCData(final String tagId, final String value, Promise promise) {
     new Thread(new Runnable() {
       @Override
       public void run() {
@@ -233,11 +233,11 @@ public class RNZebraRfidModule extends ReactContextBaseJavaModule implements Rfi
           writeAccessParams.setAccessPassword(0);
           writeAccessParams.setMemoryBank(MEMORY_BANK.MEMORY_BANK_EPC);
           writeAccessParams.setOffset(2);
-          writeAccessParams.setWriteData(tagId);
-          writeAccessParams.setWriteDataLength(tagId.length() / 4);
+          writeAccessParams.setWriteData(value);
+          writeAccessParams.setWriteDataLength(value.length() / 4);
           try {
-            reader.Actions.TagAccess.writeWait(targetId, writeAccessParams, null, null);
-            promise.resolve(tagId);
+            reader.Actions.TagAccess.writeWait(tagId, writeAccessParams, null, null);
+            promise.resolve(value);
             return;
           } catch (InvalidUsageException | OperationFailureException e) {
             e.printStackTrace();
@@ -282,6 +282,7 @@ public class RNZebraRfidModule extends ReactContextBaseJavaModule implements Rfi
       rfidReader.Events.addEventsListener(this);
       rfidReader.Events.setHandheldEvent(true);
       rfidReader.Events.setTagReadEvent(true);
+      // read/writeWait時に必要
       rfidReader.Config.setDPOState(DYNAMIC_POWER_OPTIMIZATION.DISABLE);
     } catch (InvalidUsageException | OperationFailureException e) {
       e.printStackTrace();
