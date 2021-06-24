@@ -30,4 +30,4 @@
 
 ## Usage
 
-see [example](../packages/example/pages/BarcodePage.tsx).
+see [example](../example/pages/BarcodePage.tsx).
