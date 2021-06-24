@@ -13,7 +13,6 @@ import com.facebook.react.bridge.JavaScriptModule;
 import androidx.annotation.NonNull;
 
 public class RNZebraBarcodePackage implements ReactPackage {
-
     @NonNull
     @Override
     public List<NativeModule> createNativeModules(@NonNull ReactApplicationContext reactContext) {

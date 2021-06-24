@@ -3,6 +3,7 @@ FROM node:15-slim
 ENV ANDROID_HOME=/usr/lib/android-sdk
 ENV PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/tools/bin:$ANDROID_HOME/platform-tools
 ENV NODE_ENV=development
+ENV JAVA_HOME=/root/.sdkman/candidates/java/current
 
 ARG SDK_OPTS
 RUN apt-get update \

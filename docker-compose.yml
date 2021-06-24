@@ -13,11 +13,11 @@ services:
       - JAVA_OPTS
       - http_proxy
       - https_proxy
-      - PORT
+      - METRO_PORT
       - ANDROID_ADB_SERVER_ADDRESS
       - YARN_REGISTRY
-    command: yarn example start
+    command: yarn ex start
     ports: 
-      - "$PORT:8081"
+      - "$METRO_PORT:8081"
     volumes:
       - .:/srv

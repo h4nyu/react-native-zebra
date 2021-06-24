@@ -33,5 +33,6 @@ allprojects {
         jcenter()
         maven { url 'https://www.jitpack.io' }
         flatDir { dirs "$rootDir/../node_modules/@oniku/react-native-zebra-barcode/android/libs" }
+        flatDir { dirs "$rootDir/../node_modules/@oniku/react-native-zebra-rfid/android/libs" }
     }
 }
