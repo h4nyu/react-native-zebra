@@ -20,7 +20,11 @@ def safeExtGet(prop, fallback) {
 }
 
 apply plugin: 'com.android.library'
-apply plugin: 'maven'
+// Maven plugin has been deprecated since Gradle 7.0 and is nedded only when opening the android folder stand-alone.
+// ref: https://github.com/software-mansion/react-native-reanimated/issues/703
+if (project == rootProject) {
+    apply plugin: 'maven'
+}
 
 buildscript {
     // The Android Gradle plugin is only required when opening the android folder stand-alone.
@@ -40,7 +44,12 @@ buildscript {
 }
 
 apply plugin: 'com.android.library'
-apply plugin: 'maven'
+// Maven plugin has been deprecated since Gradle 7.0 and is nedded only when opening the android folder stand-alone.
+// ref: https://github.com/software-mansion/react-native-reanimated/issues/703
+if (project == rootProject) {
+    apply plugin: 'maven'
+}
+
 
 android {
     compileSdkVersion safeExtGet('compileSdkVersion', DEFAULT_COMPILE_SDK_VERSION)
@@ -148,10 +157,14 @@ afterEvaluate { project ->
 
     task installArchives(type: Upload) {
         configuration = configurations.archives
-        repositories.mavenDeployer {
-            // Deploy to react-native-event-bridge/maven, ready to publish to npm
-            repository url: "file://${projectDir}/../android/maven"
-            configureReactNativePom pom
+        // Maven plugin has been deprecated since Gradle 7.0 and is nedded only when opening the android folder stand-alone.
+        // ref: https://github.com/software-mansion/react-native-reanimated/issues/703
+        if (project == rootProject) {
+            repositories.mavenDeployer {
+                // Deploy to react-native-event-bridge/maven, ready to publish to npm
+                repository url: "file://${projectDir}/../android/maven"
+                configureReactNativePom pom
+            }
         }
     }
 }
