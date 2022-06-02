@@ -1,23 +1,37 @@
 version: '3.4'
 
+x-env: &env 
+  # required
+  METRO_PORT: &METRO_PORT ${METRO_PORT:?}
+
+  # interal
+
+  # optional
+  ANDROID_ADB_SERVER_ADDRESS: &ANDROID_ADB_SERVER_ADDRESS ${ANDROID_ADB_SERVER_ADDRESS}
+  JAVA_OPTS: &JAVA_OPTS ${JAVA_OPTS}
+  SDK_OPTS: &SDK_OPTS ${SDK_OPTS}
+  http_proxy: &http_proxy ${http_proxy}
+  https_proxy: &https_proxy ${https_proxy}
+
+
 services:
   app: 
     build:
       context: .
       args:
-        - http_proxy
-        - https_proxy
-        - JAVA_OPTS
-        - SDK_OPTS
+        http_proxy: *http_proxy
+        https_proxy: *https_proxy
+        JAVA_OPTS: *JAVA_OPTS
+        SDK_OPTS: *SDK_OPTS
     environment:
-      - JAVA_OPTS
-      - http_proxy
-      - https_proxy
-      - METRO_PORT
-      - ANDROID_ADB_SERVER_ADDRESS
-      - YARN_REGISTRY
+      http_proxy: *http_proxy
+      https_proxy: *https_proxy
+      JAVA_OPTS: *JAVA_OPTS
+      SDK_OPTS: *SDK_OPTS
+      METRO_PORT: *METRO_PORT
+      ANDROID_ADB_SERVER_ADDRESS: *ANDROID_ADB_SERVER_ADDRESS
     command: yarn ex start
     ports: 
       - "$METRO_PORT:8081"
     volumes:
-      - .:/srv
+      - .:/app

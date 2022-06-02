@@ -21,4 +21,4 @@ RUN curl -s "https://get.sdkman.io" | bash \
     && rm commandlinetools-linux-6609375_latest.zip \
     && rm -rf /var/lib/apt/lists/* \
     && yes | sdkmanager --sdk_root=$ANDROID_HOME $SDK_OPTS "platform-tools"  
-WORKDIR /srv
+WORKDIR /app
